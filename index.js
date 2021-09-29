@@ -1,15 +1,19 @@
 "use strict";
 const sentimentAnalysis = require('./engine');
 var bodyParser = require('body-parser');
-const express = require('express');
+const express = require('express'); 
+const cors = require('cors');
 
-var app = express()
+var app = express() 
+
+app.use(cors())
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }))
 
 // parse application/json
-app.use(express.json())
+app.use(express.json()) 
+
 
 const port = process.env.PORT;
 
