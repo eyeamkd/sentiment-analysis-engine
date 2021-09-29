@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false }))
 // parse application/json
 app.use(express.json())
 
-const port = 3000
+const port = process.env.PORT;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
