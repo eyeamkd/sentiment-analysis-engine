@@ -1,0 +1,20 @@
+{
+  "name": "sentiment-analysis-engine",
+  "version": "1.0.0",
+  "description": "Sentimental Analysis Engine using Azure Cognitive Services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "ml",
+    "azure"
+  ],
+  "author": "Kunal Dubey",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/ai-text-analytics": "^5.2.0-beta.1",
+    "dotenv": "^10.0.0"
+  }
+}
