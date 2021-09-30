@@ -14,11 +14,12 @@ const textAnalyticsClient = new TextAnalyticsClient(
 async function sentimentAnalysis(text) {
   const client = textAnalyticsClient;
   const sentimentInput = [text];
-  const sentimentResult = await client.analyzeSentiment(sentimentInput); 
+  const sentimentResult = await client.analyzeSentiment(sentimentInput);
 
   let sentiment = [];
+  let documentScores = { positive: 0, negative: 0, neutral: 0 };
 
-  sentimentResult.forEach((document) => { 
+  sentimentResult.forEach((document) => {
     sentiment.push(document.sentiment);
     console.log(`ID: ${document.id}`);
     console.log(`\tDocument Sentiment: ${document.sentiment}`);
@@ -30,6 +31,9 @@ async function sentimentAnalysis(text) {
         2
       )} \tNeutral: ${document.confidenceScores.neutral.toFixed(2)}`
     );
+    documentScores.positive = document.confidenceScores.positive.toFixed(2);
+    documentScores.negative = document.confidenceScores.negative.toFixed(2);
+    documentScores.neutral = document.confidenceScores.neutral.toFixed(2);
     console.log(`\tSentences Sentiment(${document.sentences.length}):`);
     document.sentences.forEach((sentence) => {
       console.log(`\t\tSentence sentiment: ${sentence.sentiment}`);
@@ -42,8 +46,8 @@ async function sentimentAnalysis(text) {
         )} \tNeutral: ${sentence.confidenceScores.neutral.toFixed(2)}`
       );
     });
-  }); 
-  return sentiment;
+  });
+  return {sentiment,documentScores};
 }
 
 module.exports = sentimentAnalysis;
