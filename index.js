@@ -1,5 +1,5 @@
 "use strict";
-const sentimentAnalysis = require('./engine');
+const sentimentAnalysis = require('./sentiment-analysis');
 var bodyParser = require('body-parser');
 const express = require('express'); 
 const cors = require('cors');
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json()) 
 
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -24,8 +24,8 @@ app.get('/', (req, res) => {
 app.post('/analyse',async (req,res)=>{ 
     try{
         console.log("Text being passed is",req.body.text);
-        const sentiment = await sentimentAnalysis(req.body.text); 
-        res.status(200).send(sentiment[0]); 
+        const result = await sentimentAnalysis(req.body.text); 
+        res.status(200).send(result); 
         //res.send("Ok").status(200);
     } 
     catch(e){
